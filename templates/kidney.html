@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Kidney Disease Prediction</title>
+</head>
+<style>
+	button
+{
+	border-style:none;
+}
+
+h1, h2, h3, h4, h5{
+    text-align: center;
+
+}
+
+form {
+	margin-top: 3%;
+	margin-left: 29%;
+	margin-right: 21%;
+
+}
+
+form fieldset{
+	padding: 30px;
+	border-width: 20px;
+	border-style: groove;
+    border-color: #5a5a5a;
+	background-color: rgba(145, 68, 105, 0.3);
+}
+
+fieldset h1 {
+	color: #5a5a5a;
+	padding-bottom: 20px;
+	margin-left: 35px;
+	display: inline-block;
+	cursor: pointer;
+	font-size: 28px;
+	text-align: center;
+}
+
+fieldset label {
+	margin-left: 20px;
+	margin-right: 40px;
+	padding: 23px;
+	font-size: 20px;
+	display: inline-block;
+    width  : 240px;
+}
+fieldset input{
+	padding:8px;
+	color: #938c8c
+}
+fieldset input:focus{
+	color: #000;
+}
+fieldset button
+{
+	margin-left: 60px;
+	color: #fff;
+	background-color: #5a5a5a;
+	border-radius: 3px;
+	padding: 13px 39px;
+	text-align: center;
+	letter-spacing: 0.9px;
+	text-decoration: none;
+	margin-right: 15px;
+	line-height: 26px;
+	font-size: 16px;
+	box-shadow: 0px 1px 3px 0px #5a5a5a;
+	right: 0px;
+	margin-top: 15px;
+}
+
+
+.submit{
+	margin-left: 60px;
+	color: #fff;
+	background-color: #5a5a5a;
+	border-radius: 3px;
+	padding: 13px 39px;
+	text-align: center;
+	letter-spacing: 0.9px;
+	text-decoration: none;
+	margin-right: 10px;
+	line-height: 26px;
+	font-size: 16px;
+	box-shadow: 0px 1px 3px 0px #5a5a5a;
+	right: 100px;
+	margin-top: 15px;
+}
+
+#link_to_edit{
+    padding-left: 45px;
+}
+
+.fieldset{
+	margin-top: 3%;
+	margin-left: 0%;
+	margin-right: 0%;
+	padding: 30px;
+	border-width: 25px;
+	border-style: ridge;
+	border-color: #257a7a;
+	box-shadow: 6px 13px 13px 0px black;
+	background-color: #ebfffa;
+}
+nav {
+    font-family: sans-serif;
+  }
+  
+  .navbar-brand {
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  .navbar .navbar-nav .nav-link:hover{
+  color: #fc4d44;
+  }
+    </style>
+  
+  </head>
+  <body>
+        <header>
+            <!--Navigation Bar-->
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="margin-top: 0%!important; margin-bottom: 0%!important;">
+              <div class="container-fluid" style="background-color: rgb(0, 0, 35);">
+                  <!-- Logo and Image on the left side -->
+                  <div class="d-flex">
+                      <!-- Add a class to the img tag for styling -->
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJl2hN00XqtqgGbMLIR-YzxIvUPCn_5et_oA&usqp=CAU" alt="Logo" class="logo-img mt-2" style="width: 50px; height: 50px;" />
+                      <a class="navbar-brand py-4 px-2" href="/index">Obesity Epidemic Solution</a>
+                  </div>
+          
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <!-- Add your navbar-toggler icon here -->
+                  </button>
+          
+                  <!-- Navigation links on the right side -->
+                  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                      <ul class="navbar-nav ml-auto">
+                          <li class="nav-item"> <a class="nav-link" href="/index">Home</a></li>
+                          <!-- Dropdown List -->
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Disease Index
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/cancer">Cancer</a>
+                                <a class="dropdown-item" href="/heart">Heart Disease</a>
+                                <a class="dropdown-item" href="/kidney">Kidney Disease</a>
+                                <a class="dropdown-item" href="/liver">Liver Disease</a>
+                                <a class="dropdown-item" href="/diabetes">Diabetes</a>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </nav>
+    </header><br/><br/>
+    <h1 style="text-align:center;">Kidney Disease Prediction</h1>
+    <h5 style="text-align:center;">Please enter the patient details</h5>
+
+    <form action="{{ url_for('predictkidney')}}" method="post" class="form-inline">
+        <fieldset>
+            <div class="tabcontent" id="new">
+                <!-- Existing fields -->
+                <div class="form-group">
+                    <label for="age">Age (1 - 100 years)</label>
+                    <input class="form-control" type="range" id="age" name="age" min="1" max="100" value="1" step="1" oninput="updateValue('age', this.value)">
+                    <span id="ageValue">1 year</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="blood_pressure">Blood Pressure (50 - 200 mmHg)</label>
+                    <input class="form-control" type="range" id="blood_pressure" name="blood_pressure" min="50" max="200" value="50" step="1" oninput="updateValue('blood_pressure', this.value)">
+                    <span id="blood_pressureValue">50 mmHg</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="albumin">Albumin (1 - 10 g/dL)</label>
+                    <input class="form-control" type="range" id="albumin" name="albumin" min="1" max="10" value="1" step="0.1" oninput="updateValue('albumin', this.value)">
+                    <span id="albuminValue">1 g/dL</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sugar">Blood Sugar Level (50 - 300 mg/dL)</label>
+                    <input class="form-control" type="range" id="sugar" name="sugar" min="50" max="300" value="50" step="1" oninput="updateValue('sugar', this.value)">
+                    <span id="sugarValue">50 mg/dL</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pus_cell">Pus Cell Count (0 - 100)</label>
+                    <input class="form-control" type="range" id="pus_cell" name="pus_cell" min="0" max="100" value="0" step="1" oninput="updateValue('pus_cell', this.value)">
+                    <span id="pus_cellValue">0</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="blood_urea">Blood Urea (10 - 100 mg/dL)</label>
+                    <input class="form-control" type="range" id="blood_urea" name="blood_urea" min="10" max="100" value="10" step="1" oninput="updateValue('blood_urea', this.value)">
+                    <span id="blood_ureaValue">10 mg/dL</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="serum_creatinine">Serum Creatinine (0.1 - 10 mg/dL)</label>
+                    <input class="form-control" type="range" id="serum_creatinine" name="serum_creatinine" min="0.1" max="10" value="0.1" step="0.1" oninput="updateValue('serum_creatinine', this.value)">
+                    <span id="serum_creatinineValue">0.1 mg/dL</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="haemoglobin">Haemoglobin (1 - 20 g/dL)</label>
+                    <input class="form-control" type="range" id="haemoglobin" name="haemoglobin" min="1" max="20" value="1" step="0.1" oninput="updateValue('haemoglobin', this.value)">
+                    <span id="haemoglobinValue">1 g/dL</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="white_blood_cell_count">White Blood Cell Count (0 - 10000 cells/µL)</label>
+                    <input class="form-control" type="range" id="white_blood_cell_count" name="white_blood_cell_count" min="0" max="10000" value="0" step="1" oninput="updateValue('white_blood_cell_count', this.value)">
+                    <span id="white_blood_cell_countValue">0 cells/µL</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="red_blood_cell_count">Red Blood Cell Count (1 - 10 million cells/µL)</label>
+                    <input class="form-control" type="range" id="red_blood_cell_count" name="red_blood_cell_count" min="1" max="10" value="1" step="0.1" oninput="updateValue('red_blood_cell_count', this.value)">
+                    <span id="red_blood_cell_countValue">1 million cells/µL</span>
+                </div>
+                
+                <!-- Submit button -->
+                <button type="submit" class="btn btn btn-lg">Predict</button>
+            </div>
+        </fieldset>        
+    </form>
+    <script>
+        function updateValue(fieldName, value) {
+            document.getElementById(fieldName + 'Value').innerText = value + ' ' + getMeasuringUnit(fieldName);
+        }
+    
+        function getMeasuringUnit(fieldName) {
+            switch (fieldName) {
+                case 'age':
+                    return 'years';
+                case 'blood_pressure':
+                    return 'mmHg';
+                case 'albumin':
+                    return 'g/dL';
+                case 'sugar':
+                    return 'mg/dL';
+                case 'pus_cell':
+                    return '';
+                case 'blood_urea':
+                    return 'mg/dL';
+                case 'serum_creatinine':
+                    return 'mg/dL';
+                case 'haemoglobin':
+                    return 'g/dL';
+                case 'white_blood_cell_count':
+                    return 'cells/µL';
+                case 'red_blood_cell_count':
+                    return 'million cells/µL';
+                // Add cases for other fields as needed
+                // ...
+                default:
+                    return '';
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

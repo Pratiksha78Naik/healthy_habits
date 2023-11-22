@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Heart Disease | Assessment</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+    
+    <style>
+        body {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            color: #5a5a5a;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        nav {
+            font-family: sans-serif;
+        }
+
+        .navbar-brand {
+            font-size: 20px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        @media (min-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+        }
+
+        .themed-container {
+            max-width: 960px;
+            margin: auto;
+            padding: 15px;
+            margin-top: 30px;
+            background-color: rgba(0, 123, 255, .15);
+            border: 1px solid rgba(0, 123, 255, .2);
+        }
+
+        .report-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .report-table {
+            width: 80%;
+            margin: auto;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .report-table th, .report-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .prediction-section {
+            margin-top: 20px;
+        }
+
+        #download {
+            display: block;
+            margin: auto;
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="themed-container">
+        <h1 class="display-5">Heart Disease Prediction Report</h1>
+      
+        <div class="report-section">
+            <h2>User Data</h2>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Age in Years</th>
+                        <th>Sex</th>
+                        <th>CP</th>
+                        <th>Trest Bps</th>
+                        <th>Cholesterol</th>
+                        <th>FBS</th>
+                        <th>RESTECG</th>
+                        <th>Thalach</th>
+                        <th>EXANG</th>
+                        <th>Old Peak</th>
+                        <th>SLOPE</th>
+                        <th>CA</th>
+                        <th>THAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ user_data['Age in Years'].values[0] }}</td>
+                        <td>{{ user_data['Sex'].values[0] }}</td>
+                        <td>{{ user_data['CP'].values[0] }}</td>
+                        <td>{{ user_data['Trest Bps'].values[0] }}</td>
+                        <td>{{ user_data['Cholesterol'].values[0] }}</td>
+                        <td>{{ user_data['FBS'].values[0] }}</td>
+                        <td>{{ user_data['RESTECG'].values[0] }}</td>
+                        <td>{{ user_data['Thalach'].values[0] }}</td>
+                        <td>{{ user_data['EXANG'].values[0] }}</td>
+                        <td>{{ user_data['Old Peak'].values[0]}}</td>
+                        <td>{{ user_data['SLOPE'].values[0] }}</td>
+                        <td>{{ user_data['CA'].values[0] }}</td>
+                        <td>{{ user_data['THAL'].values[0] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="prediction-section">
+    <h2>Prediction</h2>
+    {% if prediction==1 %}
+        <p>You are at a high risk of Heart Disease.</p>
+        <p>Recommendations:</p>
+        <ul>
+            <li>Consult with a cardiologist for a detailed assessment and further tests.</li>
+            <li>Adopt a heart-healthy diet, including low-fat and low-sodium foods.</li>
+            <li>Engage in regular physical activity, such as walking, jogging, or cycling.</li>
+            <li>Maintain a healthy weight through a combination of diet and exercise.</li>
+            <li>Monitor blood pressure, cholesterol levels, and other cardiovascular risk factors regularly.</li>
+            <li>Take medications as prescribed by your healthcare provider.</li>
+        </ul>
+    {% elif prediction==0 %}
+        <p>You have a low risk of Heart Disease.</p>
+        <p>Recommendations:</p>
+        <ul>
+            <li>Continue with a heart-healthy lifestyle, including a balanced diet and regular exercise.</li>
+            <li>Regularly monitor your cardiovascular health through check-ups and screenings.</li>
+        </ul>
+    {% endif %}
+</div>
+
+
+    <div id="assess">
+        <!-- Download Button -->
+        <button id="download">Download Report</button>
+    </div>
+    
+    <script type="text/javascript">
+        document.getElementById("download").addEventListener("click", () => {
+            const container = document.querySelector(".themed-container");
+            var opt = {
+                margin: 1,
+                filename: 'Cancer_Assessment.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+            };
+            html2pdf().from(container).set(opt).save();
+        });
+    </script>
+</body>
+</html>

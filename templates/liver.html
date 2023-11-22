@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<title>Liver Disease Prediction</title>
+</head>
+<style>
+	button
+{
+	border-style:none;
+}
+
+h1, h2, h3, h4, h5{
+    text-align: center;
+
+}
+
+form {
+	margin-top: 3%;
+	margin-left: 29%;
+	margin-right: 21%;
+
+}
+
+form fieldset{
+	padding: 30px;
+	border-width: 20px;
+	border-style: groove;
+    border-color: #5a5a5a;
+	background-color: rgba(145, 68, 105, 0.3);
+}
+
+fieldset h1 {
+	color: #5a5a5a;
+	padding-bottom: 20px;
+	margin-left: 35px;
+	display: inline-block;
+	cursor: pointer;
+	font-size: 28px;
+	text-align: center;
+}
+
+fieldset label {
+	margin-left: 20px;
+	margin-right: 40px;
+	padding: 23px;
+	font-size: 20px;
+	display: inline-block;
+    width  : 240px;
+}
+fieldset input{
+	padding:8px;
+	color: #938c8c
+}
+fieldset input:focus{
+	color: #000;
+}
+fieldset button
+{
+	margin-left: 60px;
+	color: #fff;
+	background-color: #5a5a5a;
+	border-radius: 3px;
+	padding: 13px 39px;
+	text-align: center;
+	letter-spacing: 0.9px;
+	text-decoration: none;
+	margin-right: 15px;
+	line-height: 26px;
+	font-size: 16px;
+	box-shadow: 0px 1px 3px 0px #5a5a5a;
+	right: 0px;
+	margin-top: 15px;
+}
+
+
+.submit{
+	margin-left: 60px;
+	color: #fff;
+	background-color: #5a5a5a;
+	border-radius: 3px;
+	padding: 13px 39px;
+	text-align: center;
+	letter-spacing: 0.9px;
+	text-decoration: none;
+	margin-right: 10px;
+	line-height: 26px;
+	font-size: 16px;
+	box-shadow: 0px 1px 3px 0px #5a5a5a;
+	right: 100px;
+	margin-top: 15px;
+}
+
+#link_to_edit{
+    padding-left: 45px;
+}
+
+.fieldset{
+	margin-top: 3%;
+	margin-left: 0%;
+	margin-right: 0%;
+	padding: 30px;
+	border-width: 25px;
+	border-style: ridge;
+	border-color: #257a7a;
+	box-shadow: 6px 13px 13px 0px black;
+	background-color: #ebfffa;
+}
+nav {
+  font-family: sans-serif;
+}
+
+.navbar-brand {
+  font-size: 20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.navbar .navbar-nav .nav-link:hover{
+color: #fc4d44;
+}
+  </style>
+
+</head>
+<body>
+      <header>
+          <!--Navigation Bar-->
+          <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="margin-top: 0%!important; margin-bottom: 0%!important;">
+            <div class="container-fluid" style="background-color: rgb(0, 0, 35);">
+                <!-- Logo and Image on the left side -->
+                <div class="d-flex">
+                    <!-- Add a class to the img tag for styling -->
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJl2hN00XqtqgGbMLIR-YzxIvUPCn_5et_oA&usqp=CAU" alt="Logo" class="logo-img mt-2" style="width: 50px; height: 50px;" />
+                    <a class="navbar-brand py-4 px-2" href="/index">Obesity Epidemic Solution</a>
+                </div>
+        
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <!-- Add your navbar-toggler icon here -->
+                </button>
+        
+                <!-- Navigation links on the right side -->
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"> <a class="nav-link" href="/index">Home</a></li>
+                        <!-- Dropdown List -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Disease Index
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="/cancer">Cancer</a>
+                              <a class="dropdown-item" href="/heart">Heart Disease</a>
+                              <a class="dropdown-item" href="/kidney">Kidney Disease</a>
+                              <a class="dropdown-item" href="/liver">Liver Disease</a>
+                              <a class="dropdown-item" href="/diabetes">Diabetes</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header><br/><br/>
+    <h1 style="text-align:center;">Liver Disease Prediction</h1>
+    <h5 style="text-align:center;">Please enter the patient details</h5>
+    <form action="{{ url_for('predictliver')}}" method="post" class="form-inline">
+        <fieldset>
+          <div class="tabcontent" id="new">
+            <div class="form-group">
+              <label for="age">Age (0-100 years): </label>
+              <input type="range" id="age" name="age" min="0" max="100" value="0" step="1" oninput="updateValue('age', this.value)">
+              <!-- Display the selected value of the range -->
+              <span id="ageValue">0</span>
+          </div>
+          
+          <div class="form-group">
+              <label for="gender">Gender (0 for Male, 1 for Female): </label>
+              <input type="range" id="gender" name="gender" min="0" max="1" value="0" step="1" oninput="updateValue('gender', this.value)">
+              <!-- Display the selected value of the range -->
+              <span id="genderValue">0</span>
+          </div>
+          
+          <div class="form-group">
+              <label for="total_bilirubin">Total Bilirubin (0-10 mg/dL): </label>
+              <input type="range" id="total_bilirubin" name="total_bilirubin" min="0" max="10" value="0" step="0.1" oninput="updateValue('total_bilirubin', this.value)">
+              <!-- Display the selected value of the range -->
+              <span id="total_bilirubinValue">0</span>
+          </div>
+          
+          <div class="form-group">
+              <label for="direct_bilirubin">Direct Bilirubin (0-5 mg/dL): </label>
+              <input type="range" id="direct_bilirubin" name="direct_bilirubin" min="0" max="5" value="0" step="0.1" oninput="updateValue('direct_bilirubin', this.value)">
+              <!-- Display the selected value of the range -->
+              <span id="direct_bilirubinValue">0</span>
+          </div>
+          
+          <div class="form-group">
+              <label for="alkaline_phosphotase">Alkaline Phosphotase (0-2000 IU/L): </label>
+              <input type="range" id="alkaline_phosphotase" name="alkaline_phosphotase" min="0" max="2000" value="0" step="1" oninput="updateValue('alkaline_phosphotase', this.value)">
+              <!-- Display the selected value of the range -->
+              <span id="alkaline_phosphotaseValue">0</span>
+          </div>
+          
+          <div class="form-group">
+              <label for="alamine_aminotransferase">Alamine Aminotransferase (0-2000 IU/L): </label>
+              <input type="range" id="alamine_aminotransferase" name="alamine_aminotransferase" min="0" max="2000" value="0" step="1" oninput="updateValue('alamine_aminotransferase', this.value)">
+              <!-- Display the selected value of the range -->
+              <span id="alamine_aminotransferaseValue">0</span>
+          </div>
+          
+          <div class="form-group">
+              <label for="aspartate_aminotransferase">Aspartate Aminotransferase (0-2000 IU/L): </label>
+              <input type="range" id="aspartate_aminotransferase" name="aspartate_aminotransferase" min="0" max="2000" value="0" step="1" oninput="updateValue('aspartate_aminotransferase', this.value)">
+              <!-- Display the selected value of the range -->
+              <span id="aspartate_aminotransferaseValue">0</span>
+          </div>
+          
+          <div class="form-group">
+              <label for="total_protiens">Total Proteins (0-10 g/dL): </label>
+              <input type="range" id="total_protiens" name="total_protiens" min="0" max="10" value="0" step="0.1" oninput="updateValue('total_protiens', this.value)">
+              <!-- Display the selected value of the range -->
+              <span id="total_protiensValue">0</span>
+          </div>
+          
+          <div class="form-group">
+              <label for="albumin">Albumin (0-10 g/dL): </label>
+              <input type="range" id="albumin" name="albumin" min="0" max="10" value="0" step="0.1" oninput="updateValue('albumin', this.value)">
+              <!-- Display the selected value of the range -->
+              <span id="albuminValue">0</span>
+          </div>
+          
+          <div class="form-group">
+              <label for="albumin_and_globulin_ratio">Albumin and Globulin Ratio (0-10): </label>
+              <input type="range" id="albumin_and_globulin_ratio" name="albumin_and_globulin_ratio" min="0" max="10" value="0" step="0.1" oninput="updateValue('albumin_and_globulin_ratio', this.value)">
+              <!-- Display the selected value of the range -->
+              <span id="albumin_and_globulin_ratioValue">0</span>
+          </div>
+            </div>
+       <button type="submit" class="btn btn btn-lg">Predict</button>
+        </div>
+      </fieldset>
+    </form>
+    <script>
+      function updateValue(fieldName, value) {
+          document.getElementById(fieldName + 'Value').innerText = value;
+      }
+  </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

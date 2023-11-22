@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Liver Disease | Assessment</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+    
+    <style>
+        body {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            color: #5a5a5a;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        nav {
+            font-family: sans-serif;
+        }
+
+        .navbar-brand {
+            font-size: 20px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        @media (min-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+        }
+
+        .themed-container {
+            max-width: 1050px;
+            margin: auto;
+            padding: 15px;
+            margin-top: 30px;
+            background-color: rgba(0, 123, 255, .15);
+            border: 1px solid rgba(0, 123, 255, .2);
+        }
+
+        .report-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .report-table {
+            width: 80%;
+            margin: auto;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .report-table th, .report-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .prediction-section {
+            margin-top: 20px;
+        }
+
+        #download {
+            display: block;
+            margin: auto;
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="themed-container">
+        <h1 class="display-5">Liver Disease Prediction Report</h1>
+        
+        <div class="report-section">
+            <h2>User Data</h2>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Total Bilirubin</th>
+                        <th>Direct Bilirubin</th>
+                        <th>Alkaline Phosphotase</th>
+                        <th>Alamine Aminotransferase</th>
+                        <th>Aspartate Aminotransferase</th>
+                        <th>Total Proteins</th>
+                        <th>Albumin</th>
+                        <th>Albumin And Globulin Ratio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ user_data['Age'].values[0] }}</td>
+                        <td>{{ user_data['Gender'].values[0] }}</td>
+                        <td>{{ user_data['Total Bilirubin'].values[0] }}</td>
+                        <td>{{ user_data['Direct Bilirubin'].values[0] }}</td>
+                        <td>{{ user_data['Alkaline Phosphotase'].values[0] }}</td>
+                        <td>{{ user_data['Alamine Aminotransferase'].values[0] }}</td>
+                        <td>{{ user_data['Aspartate Aminotransferase'].values[0] }}</td>
+                        <td>{{ user_data['Total Proteins'].values[0] }}</td>
+                        <td>{{ user_data['Albumin'].values[0] }}</td>
+                        <td>{{ user_data['Albumin And Globulin Ratio'].values[0] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="prediction-section">
+    <h2>Prediction</h2>
+    {% if prediction==1 %}
+        <p>Patient has a high risk of Liver Disease</p>
+        <p>Recommendations:</p>
+        <ul>
+            <li>Consult with a hepatologist or gastroenterologist for further evaluation and tests.</li>
+            <li>Follow a liver-friendly diet, including foods that support liver health such as fruits, vegetables, and whole grains.</li>
+            <li>Avoid excessive alcohol consumption, as it can contribute to liver damage.</li>
+            <li>Maintain a healthy weight through a balanced diet and regular exercise.</li>
+            <li>Take medications as prescribed by your healthcare provider, if any.</li>
+            <li>Get regular check-ups to monitor liver function and overall health.</li>
+        </ul>
+    {% elif prediction==0 %}
+        <p>Patient has a low risk of Liver Disease</p>
+        <p>Recommendations:</p>
+        <ul>
+            <li>Continue with a healthy lifestyle, including a balanced diet and regular exercise.</li>
+            <li>Limit alcohol intake and avoid excessive consumption.</li>
+            <li>Monitor and manage any existing health conditions.</li>
+            <li>Consider regular health check-ups for preventive care.</li>
+        </ul>
+    {% endif %}
+</div>
+
+
+    <div id="assess">
+        <!-- Download Button -->
+        <button id="download">Download Report</button>
+    </div>
+    
+    <script type="text/javascript">
+        document.getElementById("download").addEventListener("click", () => {
+            const container = document.querySelector(".themed-container");
+            var opt = {
+                margin: 1,
+                filename: 'liver_Assessment.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+            };
+            html2pdf().from(container).set(opt).save();
+        });
+    </script>
+</body>
+</html>

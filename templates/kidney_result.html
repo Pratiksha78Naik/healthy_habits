@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Kidney Disease | Assessment</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+    
+    <style>
+        body {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            color: #5a5a5a;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        nav {
+            font-family: sans-serif;
+        }
+
+        .navbar-brand {
+            font-size: 20px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        @media (min-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+        }
+
+        .themed-container {
+            max-width: 960px;
+            margin: auto;
+            padding: 15px;
+            margin-top: 30px;
+            background-color: rgba(0, 123, 255, .15);
+            border: 1px solid rgba(0, 123, 255, .2);
+        }
+
+        .report-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .report-table {
+            width: 80%;
+            margin: auto;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .report-table th, .report-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .prediction-section {
+            margin-top: 20px;
+        }
+
+        #download {
+            display: block;
+            margin: auto;
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="themed-container">
+        <h1 class="display-5">Kidney Disease Prediction Report</h1>
+        
+        <div class="report-section">
+            <h2>User Data</h2>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Age</th>
+                        <th>Blood Pressure</th>
+                        <th>Albumin</th>
+                        <th>Blood Sugar Level</th>
+                        <th>Pus Cell Count</th>
+                        <th>Blood Urea</th>
+                        <th>Serum Creatinine</th>
+                        <th>Haemoglobin</th>
+                        <th>White Blood Cell Count</th>
+                        <th>Red Blood Cell Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ user_data['Age'].values[0] }}</td>
+                        <td>{{ user_data['Blood Pressure'].values[0] }}</td>
+                        <td>{{ user_data['Albumin'].values[0] }}</td>
+                        <td>{{ user_data['Blood Sugar Level'].values[0] }}</td>
+                        <td>{{ user_data['Pus Cell Count'].values[0] }}</td>
+                        <td>{{ user_data['Blood Urea'].values[0] }}</td>
+                        <td>{{ user_data['Serum Creatinine'].values[0] }}</td>
+                        <td>{{ user_data['Haemoglobin'].values[0] }}</td>
+                        <td>{{ user_data['White Blood Cell Count'].values[0] }}</td>
+                        <td>{{ user_data['Red Blood Cell Count'].values[0] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="prediction-section">
+    <h2>Prediction</h2>
+    {% if prediction==1 %}
+        <p>Patient has a high risk of Kidney Disease</p>
+        <p>Recommendations:</p>
+        <ul>
+            <li>Consult with a nephrologist for a comprehensive evaluation and further tests.</li>
+            <li>Follow a kidney-friendly diet, which may include limiting salt, potassium, and phosphorus intake.</li>
+            <li>Maintain a healthy blood pressure through lifestyle changes and medications if necessary.</li>
+            <li>Stay hydrated by drinking an adequate amount of water, unless otherwise advised by a healthcare professional.</li>
+            <li>Monitor blood sugar levels regularly if you have diabetes, and keep them under control.</li>
+            <li>Avoid over-the-counter medications that may harm the kidneys without consulting your healthcare provider.</li>
+        </ul>
+    {% elif prediction==0 %}
+        <p>Patient has a low risk of Kidney Disease</p>
+        <p>Recommendations:</p>
+        <ul>
+            <li>Continue maintaining a healthy lifestyle, including a balanced diet and regular exercise.</li>
+            <li>Stay hydrated and maintain a regular check on your blood pressure and blood sugar levels.</li>
+            <li>Consult with a healthcare professional for regular health check-ups and preventive care.</li>
+        </ul>
+    {% endif %}
+</div>
+
+
+    <div id="assess">
+        <!-- Download Button -->
+        <button id="download">Download Report</button>
+    </div>
+    
+    <script type="text/javascript">
+        document.getElementById("download").addEventListener("click", () => {
+            const container = document.querySelector(".themed-container");
+            var opt = {
+                margin: 1,
+                filename: 'liver_Assessment.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+            };
+            html2pdf().from(container).set(opt).save();
+        });
+    </script>
+</body>
+</html>

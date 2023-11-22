@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Diabetes | Assessment</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+    
+    <style>
+        body {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            color: #5a5a5a;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        nav {
+            font-family: sans-serif;
+        }
+
+        .navbar-brand {
+            font-size: 20px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        @media (min-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+        }
+
+        .themed-container {
+            max-width: 960px;
+            margin: auto;
+            padding: 15px;
+            margin-top: 30px;
+            background-color: rgba(0, 123, 255, .15);
+            border: 1px solid rgba(0, 123, 255, .2);
+        }
+
+        .report-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .report-table {
+            width: 80%;
+            margin: auto;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .report-table th, .report-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .prediction-section {
+            margin-top: 20px;
+        }
+
+        #download {
+            display: block;
+            margin: auto;
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="themed-container">
+        <h1 class="display-5">Diabetes Prediction Report</h1>
+        
+        <div class="report-section">
+            <h2>User Data</h2>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Pregnancies</th>
+                        <th>Glucose</th>
+                        <th>BloodPressure</th>
+                        <th>SkinThickness</th>
+                        <th>Insulin</th>
+                        <th>BMI</th>
+                        <th>DPF</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ user_data['Pregnancies'].values[0] }}</td>
+                        <td>{{ user_data['Glucose'].values[0] }}</td>
+                        <td>{{ user_data['BloodPressure'].values[0] }}</td>
+                        <td>{{ user_data['SkinThickness'].values[0] }}</td>
+                        <td>{{ user_data['Insulin'].values[0] }}</td>
+                        <td>{{ user_data['BMI'].values[0] }}</td>
+                        <td>{{ user_data['DPF'].values[0] }}</td>
+                        <td>{{ user_data['Age'].values[0] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="prediction-section">
+    <h2>Prediction</h2>
+    {% if prediction==1 %}
+        <p>Patient has a high risk of Diabetes</p>
+        <p>Recommendations:</p>
+        <ul>
+            <li>Consult with a healthcare professional for further evaluation and diagnosis.</li>
+            <li>Adopt a balanced diet with a focus on whole grains, fruits, vegetables, and lean proteins.</li>
+            <li>Incorporate regular physical activity into your routine, such as walking or jogging.</li>
+            <li>Maintain a healthy weight through diet and exercise.</li>
+            <li>Monitor blood sugar levels as advised by your healthcare provider.</li>
+            <li>Take prescribed medications as directed by your doctor.</li>
+        </ul>
+    {% elif prediction==0 %}
+        <p>Patient has a low risk of Diabetes</p>
+        <p>Recommendations:</p>
+        <ul>
+            <li>Continue with a healthy lifestyle, including a balanced diet and regular exercise.</li>
+            <li>Regularly monitor your health and consult with a healthcare professional for preventive care.</li>
+        </ul>
+    {% endif %}
+</div>
+
+
+    <div id="assess">
+        <!-- Download Button -->
+        <button id="download">Download Report</button>
+    </div>
+    
+    <script type="text/javascript">
+        document.getElementById("download").addEventListener("click", () => {
+            const container = document.querySelector(".themed-container");
+            var opt = {
+                margin: 1,
+                filename: 'Diabetes_Assessment.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+            };
+            html2pdf().from(container).set(opt).save();
+        });
+    </script>
+</body>
+</html>
